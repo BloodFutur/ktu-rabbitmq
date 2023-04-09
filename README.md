@@ -9,8 +9,8 @@ The task is to create two simples APIs communicating with RabbitMQ. The first AP
 ## Prerequisites
 
 - Docker
-- Node.js[https://nodejs.org/en/] (v12.16.1)
-- Express.js[https://expressjs.com/] (v4.17.1)
+- [Node.js](https://nodejs.org/en/) (v12.16.1)
+- [Express.js](https://expressjs.com/) (v4.17.1)
   
 ## Installation
 
