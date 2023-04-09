@@ -1,0 +1,54 @@
+version: '3.4'
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - ktu-cloud-lab3
+  
+  consumerapi:
+    container_name: consumerapi
+    image: consumerapi
+    restart: on-failure:10
+    build:
+      context: consumerAPI
+      dockerfile: Dockerfile
+    ports:
+      - "4001:4001"
+    environment:
+      - PORT=4001
+      - AMPQ_URL=${AMQP_URL}
+    depends_on:
+      - rabbitmq
+    networks:
+      - ktu-cloud-lab3
+
+  producerapi:
+    container_name: producerapi
+    image: producerapi
+    restart: on-failure:10
+    build:
+      context: producerAPI
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - PORT=4000
+      - AMPQ_URL=${AMQP_URL}
+    depends_on:
+      - rabbitmq
+    networks:
+      - ktu-cloud-lab3
+
+
+
+
+networks:
+  ktu-cloud-lab3:
+    driver: bridge
