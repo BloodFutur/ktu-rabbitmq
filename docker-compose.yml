@@ -47,8 +47,6 @@ services:
       - ktu-cloud-lab3
 
 
-
-
 networks:
   ktu-cloud-lab3:
     driver: bridge
